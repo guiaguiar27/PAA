@@ -1,17 +1,6 @@
 #include "menu.h"  
 // by Guilherme Aguiar S M 
-
-void print_frame(char **frame){ 
-    for(int i = 0 ; i < line ; i++){ 
-              for(int j = 0 ; j < column ; j++){  
-                  printf("%c",frame[i][j]);
-              } 
-            printf("\n");
-        }
-}
-/*__________________________________________________________________________________________________________________________________*/
-int fill_fig1(char **frame, int coordinate_line , int coordinate_column){  
-    int flag = 0 ;  
+void make_frame(char **frame){ 
     for(int i = 0 ; i < line ; i++){  
             if(i == 0 || i == line - 1){ 
                 for(int j = 0; j < column ; j++){ 
@@ -26,18 +15,29 @@ int fill_fig1(char **frame, int coordinate_line , int coordinate_column){
                     if(j == column - 1 || j == 0)
                         frame[i][j] = (char) '|';  
                     else 
-                        if(i == coordinate_line && j ==  coordinate_column) { 
-                            if(frame[i][j] == ' '){ 
-                                frame[i][j] = (char) '*'; 
-                                flag = 1 ;
-                            }  
-                        
-                        }  
-                        else frame[i][j] = (char) ' '; 
+                        frame[i][j] = (char) ' '; 
                 }
             }
         
-        }  
+        }    
+}
+void print_frame(char **frame){ 
+    for(int i = 0 ; i < line ; i++){ 
+              for(int j = 0 ; j < column ; j++){  
+                  printf("%c",frame[i][j]);
+              } 
+            printf("\n");
+        }
+}
+/*__________________________________________________________________________________________________________________________________*/
+int fill_fig1(char **frame, int coordinate_line , int coordinate_column){  
+    int flag = 0 ;  
+        make_frame(frame); 
+        if(frame[coordinate_line][coordinate_column] == ' '){ 
+            frame[coordinate_line][coordinate_column] =  (char) '*';  
+            flag = 1 ;  
+        }
+        else flag = 0 ; 
         
     return flag ; 
 }  
@@ -54,15 +54,15 @@ void fig1(int num){
         if(flag == 1){ 
             count++; 
             flag = 0 ; 
-            #ifdef DEBUG
+            #if DEBUG
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 
         else if(flag == 0){  
-            printf("N");
+            
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG1);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG1);
-            #ifdef DEBUG 
+            #if DEBUG 
                 printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
             #endif // DEBUG 
             flag = fill_fig1(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
@@ -84,20 +84,7 @@ int fill_fig2(char **frame, int coordinate_line , int coordinate_column){
     line_min = coordinate_line, line_max = line_min + 3; 
     column_min = coordinate_column, column_max = column_min + 3 ;
     
-    for(int i = 0 ; i < line ; i++){ 
-        
-        if(i == 0 || i == line - 1)
-            for(int j = 0; j < column ; j++)
-                frame[i][j] = (char) '-';  
-                
-        else 
-            for(int j = 0; j < column ;j++){ 
-                if(j == column - 1 || j == 0)
-                    frame[i][j] = (char) '|';  
-                else  
-                    frame[i][j] = (char) ' ';  
-            }     
-    }   
+    make_frame(frame);   
     //verificar o espaço  
     if(frame[line_min][column_min + 1] != ' '  
     || frame[line_max-1][column_min + 1] != ' '   
@@ -130,7 +117,7 @@ void fig2(int num){
         if(flag == 1){ 
             count++; 
             flag = 0; 
-            #ifdef DEBUG
+            #if DEBUG
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 
@@ -138,7 +125,7 @@ void fig2(int num){
             printf("N");
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG2);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG2);
-            #ifdef DEBUG 
+            #if DEBUG 
                 printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
             #endif // DEBUG 
             flag = fill_fig2(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
@@ -165,20 +152,7 @@ int fill_fig3(char **frame, int coordinate_line , int coordinate_column){
     line_min = coordinate_line, line_max = line_min + 3; 
     column_min = coordinate_column, column_max = column_min + 3 ;
     
-    for(int i = 0 ; i < line ; i++){ 
-        
-        if(i == 0 || i == line - 1)
-            for(int j = 0; j < column ; j++)
-                frame[i][j] = (char) '-';  
-                
-        else 
-            for(int j = 0; j < column ;j++){ 
-                if(j == column - 1 || j == 0)
-                    frame[i][j] = (char) '|';  
-                else  
-                    frame[i][j] = (char) ' ';  
-            }     
-    }   
+    make_frame(frame); 
 
     // verificar espaco 
     frame[line_min][column_min] = (char) '*';  
@@ -211,7 +185,7 @@ void fig3(int num){
             printf("N");
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG3);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG3);
-            #ifdef DEBUG 
+            #if DEBUG 
                 printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
             #endif // DEBUG 
             flag = fill_fig3(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
@@ -223,9 +197,72 @@ void fig3(int num){
  }  
 
 /*__________________________________________________________________________________________________________________________________*/
-void random_fig(int num ){ }  
+void random_fig(int num ){
 
+
+ }  
 /*__________________________________________________________________________________________________________________________________*/
-void create_fig(int num){ } 
+int fill_create_fig(char **frame, int coordinate_line , int coordinate_column){ 
+    int line_min,  
+    line_max,  
+    column_min, 
+    column_max, 
+    flag = 0 ;   
+
+    line_min = coordinate_line, line_max = line_min + 5; 
+    column_min = coordinate_column, column_max = column_min + 5; 
+    int coor_aux = 0 ; 
+    
+    make_frame(frame);
+
+    // Arvore  
+    /* 
+        * 
+       *** 
+      ***** 
+    */
+    for(int i = line_max; i > line_min; i--){ 
+            coor_aux = line_max  - i ;    
+        for(int j = column_min + coor_aux ; j < column_max - coor_aux ; j++){  
+            frame[i][j] = (char) '*';  
+        } 
+    }
+
+    flag = 1 ;   
+    return flag ; 
+
+ }
+/*__________________________________________________________________________________________________________________________________*/
+void create_fig(int num){  
+    srand(time(NULL));   
+    int count = 0,   
+    flag = 0;
+    Figure figuras[num];   
+    char **frame = init_frame(); 
+   
+
+    while(count < num ){  
+        if(flag == 1){ 
+            count++; 
+            flag = 0; 
+            #ifdef DEBUG
+                printf("count: %d \n", count );    
+            #endif // DEBUG  
+        } 
+        else if(flag == 0){  
+            printf("N");
+            figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG4);     
+            figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG4);
+            #if DEBUG 
+                printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
+            #endif // DEBUG 
+            flag = fill_create_fig(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
+        }
+          
+    }
+    
+    print_frame(frame); 
+
+} 
 
 /*__________________________________________________________________________________________________________________________________*/
