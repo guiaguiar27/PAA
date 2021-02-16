@@ -59,6 +59,9 @@ int random_coordinates(int choose, int fig){
         break;
     case CHOSEN_FIG2:
         conf = 3 ; 
+        break;     
+    case CHOSEN_FIG3:
+        conf = 3 ; 
         break;    
     default:
         break;
