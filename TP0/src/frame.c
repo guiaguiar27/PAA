@@ -31,21 +31,29 @@ void print_frame(char **frame){
 }
 /*__________________________________________________________________________________________________________________________________*/
 int fill_fig1(char **frame, int coordinate_line , int coordinate_column){  
-    int flag = 0 ;  
-        make_frame(frame); 
+     
+        // verificado / problema não é aqui  
+
+    
         if(frame[coordinate_line][coordinate_column] == ' '){ 
-            frame[coordinate_line][coordinate_column] =  (char) '*';  
-            flag = 1 ;  
+            frame[coordinate_line][coordinate_column] =  (char) '*';   
+            return 1;  
         }
-        else flag = 0 ; 
         
-    return flag ; 
+        else{ 
+            #if DEBUG 
+                printf("Lugar ocupado\n"); 
+            #endif
+            }    
+       return 0 ; 
+        
 }  
 /*__________________________________________________________________________________________________________________________________*/
 void fig1(int num){ 
-    char **frame = init_frame(); 
+    char **frame = init_frame();  
+    make_frame(frame);   
     int flag = 0, 
-    count = 0;
+    count = 1;
     Figure figuras[num];
     srand(time(NULL));   
     
@@ -53,24 +61,25 @@ void fig1(int num){
     while(count < num ){  
         if(flag == 1){ 
             count++; 
-            flag = 0 ; 
-            #if DEBUG
-                printf("count: %d \n", count );    
-            #endif // DEBUG  
+            flag = 0; 
         } 
-        else if(flag == 0){  
-            
+        if(flag == 0){  
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG1);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG1);
             #if DEBUG 
                 printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
             #endif // DEBUG 
             flag = fill_fig1(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
-        }
+        } 
+        #if DEBUG
+            printf("count: %d \n", count );   
+            printf("flag: %d \n", flag );   
+                  
+        #endif // DEBUG 
           
-    }
+    } 
+    print_frame(frame);
     
-    print_frame(frame); 
     
 }    
 /*__________________________________________________________________________________________________________________________________*/ 
@@ -83,8 +92,7 @@ int fill_fig2(char **frame, int coordinate_line , int coordinate_column){
 
     line_min = coordinate_line, line_max = line_min + 3; 
     column_min = coordinate_column, column_max = column_min + 3 ;
-    
-    make_frame(frame);   
+      
     //verificar o espaço  
     if(frame[line_min][column_min + 1] != ' '  
     || frame[line_max-1][column_min + 1] != ' '   
@@ -111,7 +119,7 @@ void fig2(int num){
     flag = 0;
     Figure figuras[num];   
     char **frame = init_frame(); 
-   
+    make_frame(frame);
 
     while(count < num ){  
         if(flag == 1){ 
@@ -152,8 +160,6 @@ int fill_fig3(char **frame, int coordinate_line , int coordinate_column){
     line_min = coordinate_line, line_max = line_min + 3; 
     column_min = coordinate_column, column_max = column_min + 3 ;
     
-    make_frame(frame); 
-
     // verificar espaco 
     frame[line_min][column_min] = (char) '*';  
     frame[line_min][column_max] = (char) '*'; 
@@ -164,25 +170,25 @@ int fill_fig3(char **frame, int coordinate_line , int coordinate_column){
     flag = 1 ;   
     return flag ; 
 
-}
+} 
+/*__________________________________________________________________________________________________________________________________*/ 
 void fig3(int num){ 
     srand(time(NULL));   
     int count = 0,   
     flag = 0;
     Figure figuras[num];   
-    char **frame = init_frame(); 
+    char **frame = init_frame();  
+    make_frame(frame);
    
-
     while(count < num ){  
         if(flag == 1){ 
             count++; 
             flag = 0; 
-            #ifdef DEBUG
+            #if DEBUG
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 
         else if(flag == 0){  
-            printf("N");
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG3);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG3);
             #if DEBUG 
@@ -213,7 +219,6 @@ int fill_create_fig(char **frame, int coordinate_line , int coordinate_column){
     column_min = coordinate_column, column_max = column_min + 5; 
     int coor_aux = 0 ; 
     
-    make_frame(frame);
 
     // Arvore  
     /* 
@@ -238,14 +243,15 @@ void create_fig(int num){
     int count = 0,   
     flag = 0;
     Figure figuras[num];   
-    char **frame = init_frame(); 
+    char **frame = init_frame();  
+    make_frame(frame);
    
 
     while(count < num ){  
         if(flag == 1){ 
             count++; 
             flag = 0; 
-            #ifdef DEBUG
+            #if DEBUG
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 

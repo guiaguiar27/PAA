@@ -4,8 +4,7 @@
                                     /** Defines */
 #define line  20  
 #define column  80    
-#define asteriscos_fig2 5 
-#define DEBUG 1 
+#define DEBUG 1
 #define CHOSEN_LINE 0  
 #define CHOSEN_COLUMN 1 
 #define CHOSEN_FIG1 1 

@@ -34,7 +34,7 @@ void select(){
 /*__________________________________________________________________________________________________________________________________*/
 int *menu(){ 
     int *ans = (int*)malloc(2*sizeof(int));
-    #ifdef DEBUG
+    #if DEBUG
         printf("\n===== DEBUG ======\n");
     #endif // DEBUG
     printf("PROGRAMA GERADOR DE OBRA DE ARTE:\n=================================\nEscolha o tipo de figura basica a ser usada para criar a obra:\n");  
@@ -42,7 +42,8 @@ int *menu(){
     printf("Digite o tipo de figura basica desejada: ");
     scanf("%d",&ans[0]); 
     printf("Digite a quantidade de figuras (menor ou igual a zero para aleatorio): ");
-    scanf("%d",&ans[1]); 
+    scanf("%d",&ans[1]);  
+    if(ans[1] >= 100 ) ans[1] = 100 ; 
     
     return ans; 
 }  
