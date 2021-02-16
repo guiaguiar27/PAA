@@ -204,8 +204,55 @@ void fig3(int num){
 
 /*__________________________________________________________________________________________________________________________________*/
 void random_fig(int num ){
-
-
+    srand(time(NULL));   
+    int count = 0,   
+    flag = 0;
+    Figure figuras[num];   
+    char **frame = init_frame();  
+    make_frame(frame); 
+    int choose = 0 ; 
+   
+    while(count < num ){  
+        if(flag == 1){ 
+            count++; 
+            flag = 0; 
+            #if DEBUG
+                printf("count: %d \n", count );    
+            #endif // DEBUG  
+        } 
+        else if(flag == 0){  
+            figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG3);     
+            figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG3); 
+            choose = (rand() % 
+            (4 + 1 - 1 )) + 1;  
+            #if DEBUG 
+                printf("coordinates: %d %d \n", figuras[count].coordinate_line , figuras[count].coordinate_column );  
+            #endif // DEBUG  
+            switch (choose)
+            {
+            case 1: 
+                flag = fill_fig1(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
+                break;
+            case 2:
+                flag = fill_fig2(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
+                break;
+            case 3: 
+                flag = fill_fig3(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
+                break; 
+            case 4: 
+                flag = fill_create_fig(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
+                break;
+            
+            
+            default:
+                break;
+            }
+            
+        }
+          
+    }
+    
+    print_frame(frame); 
  }  
 /*__________________________________________________________________________________________________________________________________*/
 int fill_create_fig(char **frame, int coordinate_line , int coordinate_column){ 
