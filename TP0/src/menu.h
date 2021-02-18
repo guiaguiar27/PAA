@@ -4,7 +4,7 @@
                                     /** Defines */
 #define line  20  
 #define column  80    
-#define DEBUG 1
+#define DEBUG 0
 #define CHOSEN_LINE 0  
 #define CHOSEN_COLUMN 1 
 #define CHOSEN_FIG1 1 
@@ -40,7 +40,7 @@ int fill_create_fig(char **frame, int coordinate_line , int coordinate_column);
 /**  Menu funcions  */
 void select();   
 int random_coordinates(int choose, int fig); 
-int *menu(); 
+void menu(); 
 
 /**  Frame funcions  */
 char **init_frame(); 
