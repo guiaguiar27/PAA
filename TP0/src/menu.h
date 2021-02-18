@@ -32,7 +32,9 @@ typedef struct {
  */
 void fig1(int num); 
 /** 
- * 
+ * \brief fills the figure from the frame given by reference 
+ * \param frame frame  
+ * \param coordinate random points of line and column 
  */
 int fill_fig1(char **frame, int coordinate_line , int coordinate_column); 
 /** 
@@ -40,15 +42,19 @@ int fill_fig1(char **frame, int coordinate_line , int coordinate_column);
  */
 void fig2(int num); 
 /** 
- * 
- */ 
+ * \brief fills the figure from the frame given by reference 
+ * \param frame frame  
+ * \param coordinate random points of line and column 
+ */
 int fill_fig2(char **frame, int coordinate_line , int coordinate_column);  
 /** 
  * \brief Initialize the frame and define the possible coordinates of the figure in the table 
  */
 void fig3(int num);   
 /** 
- * 
+ * \brief fills the figure from the frame given by reference 
+ * \param frame frame  
+ * \param coordinate random points of line and column 
  */
 int fill_fig3(char **frame, int coordinate_line , int coordinate_column);  
 /** 
@@ -60,8 +66,10 @@ void random_fig(int num);
  */
 void crate_fig(int num);  
 /** 
- * 
- */  
+ * \brief fills the figure from the frame given by reference 
+ * \param frame frame  
+ * \param coordinate random points of line and column 
+ */
 int fill_create_fig(char **frame, int coordinate_line , int coordinate_column);
 /** 
  * 
@@ -78,21 +86,21 @@ void select();
  */
 int random_coordinates(int choose, int fig);  
 /** 
- * 
+ * \brief Print options 
  */
 void menu(); 
 
                     /**  Frame funcions  */ 
 /** 
- * 
+ * \brief allocate the frame 
  */
 char **init_frame();  
 /** 
- * 
+ * \brief draw the column and line frame's
  */
 void make_frame(char **frame);  
 /** 
- * 
+ * \brief show frame
  */ 
 void print_frame(char **frame); 
 
