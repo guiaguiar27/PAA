@@ -1,7 +1,8 @@
 #include "src/menu.c" 
 int main(){ 
     
-    select(); 
+    select();  
+    printf("\n______________FIM______________\n");
     return 0 ; 
 
 }

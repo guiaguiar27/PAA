@@ -8,25 +8,22 @@ void select(){
     int fig =  0; 
     int num = 0;     
      
-     
-    
-    while(fig != 6 ){ 
+    while(fig != 6 ){  
+
         printf("Digite o tipo de figura basica desejada: ");
         scanf("%d",&fig);  
-        if(fig == 6){ 
-            printf("\n______________FIM______________\n"); 
-            return; 
-        }
+        if(fig == 6) return;
         if (fig < 1  || fig > 6 )  printf("______________Digito invalido______________\n");
         
         else {
+            
             printf("Digite a quantidade de figuras (menor ou igual a zero para aleatorio): ");
             scanf("%d",&num); 
-            if(num >= 100 )  
-                num = 100 ;
-            if (num == 0)  
-                num = (rand() % (100 + 1 - 1 )) + 1; 
-            printf("Valores: tipo de figura: %d, número de figuras: %d \n\n",fig,num);
+            if(num >= 100 ) num = 100 ;
+            if (num == 0) num = (rand() % (100 + 1 - 1 )) + 1; 
+            
+            printf("Valores: tipo de figura: %d, número de figuras: %d \n\n",fig,num); 
+
             switch (fig)
             {
             case 1:

@@ -26,24 +26,73 @@ typedef struct {
                                     /** Funciots */
    
 
-/**  Figure funcions  */
+                                /**  Figure funcions  */ 
+/** 
+ * \brief Initialize the frame and define the possible coordinates of the figure in the table 
+ */
 void fig1(int num); 
-int fill_fig1(char **frame, int coordinate_line , int coordinate_column);
+/** 
+ * 
+ */
+int fill_fig1(char **frame, int coordinate_line , int coordinate_column); 
+/** 
+ * \brief Initialize the frame and define the possible coordinates of the figure in the table 
+ */
 void fig2(int num); 
-int fill_fig2(char **frame, int coordinate_line , int coordinate_column); 
-void fig3(int num);  
-int fill_fig3(char **frame, int coordinate_line , int coordinate_column); 
-void random_fig(int num); 
-void crate_fig(int num);   
+/** 
+ * 
+ */ 
+int fill_fig2(char **frame, int coordinate_line , int coordinate_column);  
+/** 
+ * \brief Initialize the frame and define the possible coordinates of the figure in the table 
+ */
+void fig3(int num);   
+/** 
+ * 
+ */
+int fill_fig3(char **frame, int coordinate_line , int coordinate_column);  
+/** 
+ * \brief Initialize the framem, define the possible coordinates of the figure in the table and select by random which figure will be printed 
+ */
+void random_fig(int num);  
+/** 
+ * \brief Initialize the frame and define the possible coordinates of the figure in the table 
+ */
+void crate_fig(int num);  
+/** 
+ * 
+ */  
 int fill_create_fig(char **frame, int coordinate_line , int coordinate_column);
-
-/**  Menu funcions  */
-void select();   
-int random_coordinates(int choose, int fig); 
+/** 
+ * 
+ */
+                    /*          *  Menu funcions  */ 
+/** 
+ * \brief define which action the program will do 
+ */
+void select(); 
+/** 
+ * \brief Select the possible values for coordinates keeping the boundaries   
+ *  \param choose select wich dimension the value will go , line or column
+ *  \param fig 
+ */
+int random_coordinates(int choose, int fig);  
+/** 
+ * 
+ */
 void menu(); 
 
-/**  Frame funcions  */
-char **init_frame(); 
+                    /**  Frame funcions  */ 
+/** 
+ * 
+ */
+char **init_frame();  
+/** 
+ * 
+ */
 void make_frame(char **frame);  
+/** 
+ * 
+ */ 
 void print_frame(char **frame); 
 
