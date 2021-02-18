@@ -97,6 +97,7 @@ int fill_fig2(char **frame, int coordinate_line , int coordinate_column){
     if(frame[line_min][column_min + 1] != ' '  
     || frame[line_max-1][column_min + 1] != ' '   
     || frame[line_min + 1][column_min] != ' '  
+    || frame[line_min + 1][column_min + 1] != ' '   
     || frame[line_min + 1][column_max - 1] != ' ' ){ 
         return flag ;
     } 
@@ -129,8 +130,7 @@ void fig2(int num){
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 
-        else if(flag == 0){  
-            printf("N");
+        else if(flag == 0){
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG2);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG2);
             #if DEBUG 
@@ -155,19 +155,28 @@ int fill_fig3(char **frame, int coordinate_line , int coordinate_column){
     line_max,  
     column_min, 
     column_max, 
-    flag = 0 ;   
+    flag = 0 ;    
+    int correction_column  = 2,  
+    correction_line  = 3 ; 
 
-    line_min = coordinate_line, line_max = line_min + 3; 
-    column_min = coordinate_column, column_max = column_min + 3 ;
+    line_min = coordinate_line, line_max = line_min + correction_line; 
+    column_min = coordinate_column, column_max = column_min + correction_column ;
     
-    // verificar espaco 
+    if(frame[line_min][column_min] != ' '  
+    || frame[line_min][column_max] != ' '   
+    || frame[line_min + 1][column_max - 1 ] != ' '  
+    || frame[line_max - 1][column_min] != ' '   
+    || frame[line_max - 1][column_max] != ' ' ){ 
+        return flag ;
+    } 
+
     frame[line_min][column_min] = (char) '*';  
     frame[line_min][column_max] = (char) '*'; 
-    frame[line_min + 1][column_min + 1] = (char) '*';
+    frame[line_min + 1][column_max - 1 ] = (char) '*';
     frame[line_max-1][column_min] = (char) '*';  
     frame[line_max-1][column_max] = (char) '*'; 
+    flag = 1 ; 
     
-    flag = 1 ;   
     return flag ; 
 
 } 
@@ -221,8 +230,7 @@ void random_fig(int num ){
             #endif // DEBUG  
         } 
         else if(flag == 0){  
-            figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG3);     
-            figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG3); 
+             
             choose = (rand() % 
             (4 + 1 - 1 )) + 1;  
             #if DEBUG 
@@ -231,15 +239,23 @@ void random_fig(int num ){
             switch (choose)
             {
             case 1: 
+                figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG1);     
+                figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG1); 
                 flag = fill_fig1(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
                 break;
-            case 2:
+            case 2:         
+                figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG2);     
+                figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG2);
                 flag = fill_fig2(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
                 break;
             case 3: 
+                figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG3);     
+                figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG3); 
                 flag = fill_fig3(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
                 break; 
-            case 4: 
+            case 4:  
+                figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG4);     
+                figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG4);
                 flag = fill_create_fig(frame, figuras[count].coordinate_line , figuras[count].coordinate_column); 
                 break;
             
@@ -267,15 +283,11 @@ int fill_create_fig(char **frame, int coordinate_line , int coordinate_column){
     int coor_aux = 0 ; 
     
 
-    // Arvore  
-    /* 
-        * 
-       *** 
-      ***** 
-    */
+   
     for(int i = line_max; i > line_min; i--){ 
             coor_aux = line_max  - i ;    
         for(int j = column_min + coor_aux ; j < column_max - coor_aux ; j++){  
+            if(frame[i][j] != ' ') return flag; 
             frame[i][j] = (char) '*';  
         } 
     }
@@ -319,3 +331,4 @@ void create_fig(int num){
 } 
 
 /*__________________________________________________________________________________________________________________________________*/
+ 

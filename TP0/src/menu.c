@@ -52,20 +52,20 @@ int *menu(){
 int random_coordinates(int choose, int fig){  
     
     int lower, upper;   
-    int conf = 0 ; 
+    int conf = 0 ;  
     switch (fig)
     {
     case CHOSEN_FIG1:
         conf = 2 ; 
         break;
     case CHOSEN_FIG2:
-        conf = 3 ; 
+        conf = 4 ; 
         break;     
     case CHOSEN_FIG3:
-        conf = 3 ; 
+        conf = 4 ; 
         break;     
     case CHOSEN_FIG4:
-        conf = 5 ; 
+        conf = 6 ;  
         break;    
     default:
         break;
