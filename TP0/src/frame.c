@@ -310,7 +310,10 @@ void create_fig(int num){
     char **frame = init_frame();  
     make_frame(frame); 
     // repair 
-    if (num > 60) num = 60 ;
+    if (num > 60) { 
+        printf("Essa figura suporta até 60fig / quadro\n");
+        num = 60 ; 
+        }
 
     while(count < num ){  
         if(flag == 1){ 
