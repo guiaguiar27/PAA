@@ -283,11 +283,16 @@ int fill_create_fig(char **frame, int coordinate_line , int coordinate_column){
     int coor_aux = 0 ; 
     
 
-   
     for(int i = line_max; i > line_min; i--){ 
             coor_aux = line_max  - i ;    
         for(int j = column_min + coor_aux ; j < column_max - coor_aux ; j++){  
-            if(frame[i][j] != ' ') return flag; 
+            if(frame[i][j] != ' ') return flag;   
+        } 
+    } 
+
+    for(int i = line_max; i > line_min; i--){ 
+            coor_aux = line_max  - i ;    
+        for(int j = column_min + coor_aux ; j < column_max - coor_aux ; j++){  
             frame[i][j] = (char) '*';  
         } 
     }
@@ -303,8 +308,9 @@ void create_fig(int num){
     flag = 0;
     Figure figuras[num];   
     char **frame = init_frame();  
-    make_frame(frame);
-   
+    make_frame(frame); 
+    // repair 
+    if (num > 60) num = 60 ;
 
     while(count < num ){  
         if(flag == 1){ 
@@ -314,8 +320,7 @@ void create_fig(int num){
                 printf("count: %d \n", count );    
             #endif // DEBUG  
         } 
-        else if(flag == 0){  
-            printf("N");
+        else if(flag == 0){ 
             figuras[count].coordinate_line = random_coordinates(CHOSEN_LINE, CHOSEN_FIG4);     
             figuras[count].coordinate_column = random_coordinates(CHOSEN_COLUMN,CHOSEN_FIG4);
             #if DEBUG 
